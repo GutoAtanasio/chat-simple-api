@@ -11,13 +11,11 @@ const io = new Server(server, {
     cors: {origin: '*'}
 });
 
-let messages = []
 
 io.on('connection', (socket) => {
     console.log('Um usuário se conectou', socket.id);
 
     socket.on('registerUser', (username) => {
-        username.push({ id: socket.id, username});
         io.emit('userConnect', username)
 
         socket.emit('systemMessage', 'Bem vindo ao chat,' + username)
